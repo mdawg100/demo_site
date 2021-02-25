@@ -1,0 +1,20 @@
+.secret{
+	color: red;
+	opacity: 0.1;
+}
+
+#intro{
+	color: black;
+	outline-color: black;
+	outline-style: dashed;
+	white-space: nowrap;
+}
+
+.escape {
+	color: black;
+	text-align: center;
+	text-decoration: overline;
+	letter-spacing: 10px;
+	text-shadow: 2px 2px;
+}
+

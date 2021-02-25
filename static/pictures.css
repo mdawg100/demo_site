@@ -1,0 +1,40 @@
+body {
+	background-color: Sienna;
+}
+
+.display-1 {
+	color: SaddleBrown;
+    border-width: thick;
+    border-color: Wheat;
+    border-style: solid;
+    padding: 10px;
+	background-color: SandyBrown;
+	text-shadow: 3px 2px black;
+	font-family: "Courier New", Times, serif;
+}
+
+.three-friends{
+	height: auto;
+	width: 500;
+}
+
+.more-margin {
+	margin-top: 20;
+}
+
+.extra-margin {
+	margin-top: 40;
+}
+
+.stop-margin{
+	margin-top: 100;
+}
+
+.link-display{
+	color: SaddleBrown;
+    border-width: thick;
+    border-color: Wheat;
+    border-style: solid;
+    padding: 10px;
+	background-color: SandyBrown;
+}

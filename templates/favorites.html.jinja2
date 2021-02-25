@@ -1,0 +1,144 @@
+<!doctype html>
+
+<html>
+
+   <head>
+     <title>My Homepage</title>
+	 <meta name="viewport" content="width=device-width, initial-scale=1"> <!--specifies sizing--> 
+	 <link rel="stylesheet" href="static/bootstrap.css">
+	 <link rel="stylesheet" href="static/favorites.css">
+	 <script src="static/jquery-3.5.1.js">
+	 </script>
+	 <script>
+	 
+		// Pictures fade in and out NOT WORKING
+		$(document).ready(function(){
+			$("button").click(function(){
+				$("a").fadeToggle();
+				console.log("pics not fading");
+			})
+		}) 
+		// Picutres fade in and out NOT WORKING
+		
+		// Stop alert changes background to green mouse enters
+		$(document).ready(function(){
+			$(".alert").mouseenter(function(){
+				$(this).css("background-color", "lightgreen");
+				console.log("background changed");
+			})
+		}) 
+		// Stop alert changes background to green when mouse enters
+		
+		// Stop alert changes background back to red when mouse exits
+		$(document).ready(function(){
+			$(".alert").mouseleave(function(){
+				$(this).css("background-color", "MistyRose");
+				console.log("background changed");
+			})
+		}) 
+		// Stop alert changes background back to red when mouse exits
+		
+	 </script>
+   </head>
+
+<body>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<h1><p class="text-center display-1">Some of my FAV things</p></h1>
+		</div>
+	</div>
+	
+<table class="table text-center">
+  <thead>
+    <tr>
+      <th scope="col" style="border-color: darkgoldenrod"><h4>Category</h4></th>
+      <th scope="col" style="border-color: darkgoldenrod"><h4>My Fav :)</h4></th>
+      <th scope="col" style="border-color: darkgoldenrod"><h4>Best Memory</h4></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Song</th>
+      <td><a href="https://www.billboard.com/charts/hot-100">See for yourself!</a></td>
+      <td>Playing music I don't actually like to seem more accessible</td>
+    </tr>
+    <tr>
+      <th scope="row">Food</th>
+      <td>Fish and Salad</td>
+      <td>Never ordering it in real life</td>
+    </tr>
+    <tr>
+      <th scope="row">Fav place I've Visited</th>
+      <td>Bali</td>
+      <td>Telling people how much the trip changed me after I got back</td>
+    </tr>
+    <tr>
+      <th scope="row">Movie</th>
+      <td>Something by Wes Anderson</td>
+      <td>Watching on 2x speed once so that I could post about it</td>
+    </tr>
+    <tr>
+      <th scope="row">Book</th>
+      <td>{{books[num]}}</td>
+      <td>Being forced to read it in high school and not absorbing any of it in protest</td>
+    </tr>
+  </tbody>
+</table>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<img src="static/451.jpg" alt="Fav Book!" class="img-fluid three-friends mx-auto d-block">
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-sm-12">
+			<img src="static/salad.jpeg" alt="Fav Salad!" class="img-fluid three-friends mx-auto d-block">
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-sm-12">
+			<img src="static/bali.jpg" alt="Fav Place!" class="img-fluid three-friends mx-auto d-block">
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="alert alert-danger extra-margin" role="alert">
+			<h4 class="alert-heading">STOP!</h4>
+			<h6>Before you leave this page, you NEED to follow my insta <a href="https://www.instagram.com/puppydogs4days/">@puppydogs4days</a></h6>
+			</div>	
+		</div>
+	</div>
+	
+	<div class="row text-center">
+		<div class="col-sm-12">
+			<button class="extra-margin">Or, trap yourself here forever :)</button>
+		</div>
+	</div>
+
+	<div class="row more-margin link-display">
+		
+		<div class="col-sm-4">
+			<div class="text-center">
+				<h3><a href="bootstrap_test.html">Homepage!</a></h3>
+			</div>
+		</div>
+
+		<div class="col-sm-4">
+			<div class="text-center">
+				<h3><a href="about_me.html">About Me!</a></h3>
+			</div>
+		</div>
+			
+		<div class="col-sm-4">
+			<div class="text-center">
+				<h3><a href="pictures.html">Pictures!</a></h3>
+			</div>
+		</div>
+			
+	</div>
+
+</body>

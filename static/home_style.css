@@ -1,0 +1,62 @@
+h2 {
+	font-family: "Papyrus", Times, serif;
+}
+
+h1 {
+    color: DarkMagenta;
+    border-width: thick;
+    border-color: DarkMagenta;
+    border-style: solid;
+    padding: 10px;
+	background-color: LightSeaGreen;
+	text-shadow: 2px 2px pink;
+	font-family: "Papyrus", Times, serif;
+}
+
+body{
+	background-color: lightblue;
+}
+
+p {
+	color: DarkMagenta;
+}
+
+h3 {
+	color: DarkSlateGray;
+	font-family: "Times New Roman", Times, serif;
+	font-family: "Papyrus", Times, serif;
+}
+
+ul {
+	color: DarkMagenta;
+}
+
+ol {
+	color: DarkMagenta;
+}
+
+#photo-title {
+	color: DarkSlateGray;
+}
+
+#website-title {
+	color: DarkSlateGray;
+}
+
+#main-paragraph {
+	color: blue;
+}
+
+.important{
+	background: red;
+	color: blue;
+}
+
+p.important {
+	background: yellow;
+}
+
+.secret{
+	border-color: red;
+	border-style: solid;
+}

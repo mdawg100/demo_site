@@ -1,0 +1,66 @@
+h1 {
+    color: Seashell;
+    border-width: thick;
+    border-color: Gainsboro;
+    border-style: solid;
+    padding: 10px;
+	background-color: lightslategray;
+	text-shadow: 2px 2px black;
+	font-family: "Lucida Console", Times, serif;
+}
+
+h2 {
+	color: DarkMagenta;
+}
+
+body {
+	background-color: Seashell;
+}
+
+.no-padding {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.more-margin {
+	margin-top: 20px;
+}
+
+.more-bottom-margin {
+	margin-top: 20px;
+}
+
+.card {
+        margin: 0 auto; 
+        float: none; 
+        margin-bottom: 10px; 
+		background-color: peachpuff;
+		border-width: thick;
+		border-color: turquoise;
+		border-style: solid;
+}
+
+img {
+		margin-top: 10px;
+		border-width: thick;
+		border-color: lightslategray;
+		border-style: solid;
+}
+
+.list-group {
+	padding-right: 0px;
+	margin-top: 5px;
+	border-width: thick;
+	border-color: lightslategray;
+	border-style: solid;
+}
+
+.more-padding {
+	padding-top: 50px;
+}
+
+#visit-list {
+	list-style-position: inside;
+	background-color: lightslategray;
+	color: whitesmoke;
+}

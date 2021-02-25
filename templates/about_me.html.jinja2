@@ -1,0 +1,145 @@
+<!doctype html>
+
+<html>
+
+   <head>
+     <title>My Homepage</title>
+	 <meta name="viewport" content="width=device-width, initial-scale=1"> <!--specifies sizing--> 
+	 <link rel="stylesheet" href="static/bootstrap.css">
+	 <link rel="stylesheet" href="static/about_me.css">
+	 <script src="static/jquery-3.5.1.js">
+	 </script>
+	 <script>
+		
+		// Change background color with every click
+		i = 0;
+		colors = ["Moccasin", "MintCream", "Orchid", "PaleGreen", "PowderBlue", "SeaShell", "Tan", "Wheat", "Thistle"];
+		$(document).ready(function(){
+			$("body").click(function(){
+				if (i==colors.length-1){
+					i = 0;
+				}
+				$(this).css("background", colors[i]);
+				console.log(i);
+				console.log(colors[i]);
+				i = i+1;
+			})
+		})
+		
+		// Change the philosophical belief
+		x = 0;
+		$(document).ready(function(){
+			$("button").click(function(){
+				if (x==0){
+					$("#change").append(" Obviously an unhealthy blend of Nihilism and Absurdism.");
+					console.log("changing the words");
+					x = 1;
+					}
+			})
+		}) 
+		// Change the philosophical belief
+		
+		// Stop alert changes background to green mouse enters
+		$(document).ready(function(){
+			$(".alert").mouseenter(function(){
+				$(this).css("background-color", "lightgreen");
+				console.log("background changed");
+			})
+		}) 
+		// Stop alert changes background to green when mouse enters
+		
+		// Stop alert changes background back to red when mouse exits
+		$(document).ready(function(){
+			$(".alert").mouseleave(function(){
+				$(this).css("background-color", "MistyRose");
+				console.log("background changed");
+			})
+		}) 
+		// Stop alert changes background back to red when mouse exits
+		
+	 </script>
+   </head>
+
+<body>
+
+	<div class="container">
+	
+		<div class="row">
+			<div class="col-sm-12">
+				<h1><p class="text-center">All About Me!</p></h1>
+			</div>
+		</div>
+	
+		<div class="row">
+			<ul class="list-group">
+				<li class="list-group-item"><h3 class="font-weight: bold">Where did I grow up?</h3>I'm just a farm town boy/girl taking on a big city!</li>
+				<li class="list-group-item"><h3 class="font-weight: bold">What school did I go to?</h3>One where I had a lot of friends! It was a classic, American public school. See? I'm just like you! There's a picture of it below!</li>
+				<li class="list-group-item"><h3 class="font-weight: bold">What is my occupation?</h3>My job is being your best friend! That way, companies pay me money to "influence" you to buy their product. It's a win-win!</li>
+				<li class="list-group-item"><h3 class="font-weight: bold">What are my plans in life?</h3>This in perpetuity. I've already modified my behavior and beliefs to sustain this lifestyle; there's no going back now.</li>
+				<li id="change" class="list-group-item"><h3 class="font-weight: bold">Which philosophical belief do I subscribe to?</h3>What?</li>
+			</ul>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="text-center">
+					<img src="static/highschool.JPG" alt="Welcome to the team!" class="img-fluid more-margin">
+				</div>
+			</div>
+		</div>
+
+
+        <div class="row more-margin">
+			<div class="col-sm-12">
+                    <ul id="visit-list">
+                        <lh class="card-title text-center"><h3 class="font-weight: bold">Places I visit on the reg!</h3></lh>
+                        {% for place in places %}
+                        <li>{{ place }}</li>
+                        {% endfor %}
+                    </ul>
+            </div>
+        </div>
+
+		
+			<div class="row text-center">
+				<div class="col-sm-12">
+					<button id="text" class="more-margin">The truth</button>
+				</div>
+			</div>
+		
+		<div class="row more-margin">
+			<div class="col-sm-12">
+				<div class="alert alert-danger extra-margin" role="alert">
+				<h4 class="alert-heading">STOP!</h4>
+				<h6>Before you leave this page, you NEED to follow my insta <a href="https://www.instagram.com/puppydogs4days/">@puppydogs4days</a></h6>
+				</div>	
+			</div>
+		</div>
+		
+		<div class="row">
+		
+			<div class="col-sm-4">
+				<div class="text-center">
+					<h3><a href="bootstrap_test.html">Homepage!</a></h3>
+				</div>
+			</div>
+
+			<div class="col-sm-4">
+				<div class="text-center">
+					<h3><a href="pictures.html">Pictures!</a></h3>
+				</div>
+			</div>
+			
+			<div class="col-sm-4">
+				<div class="text-center">
+					<h3><a href="favorites.html">Favorites!</a></h3>
+				</div>
+			</div>
+			
+			
+		</div>		
+
+		
+	</div>
+
+</body>

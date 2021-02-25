@@ -1,0 +1,142 @@
+<!doctype html>
+
+<html>
+
+   <head>
+     <title>My Homepage</title>
+	 <meta name="viewport" content="width=device-width, initial-scale=1"> <!--specifies sizing--> 
+	 <link rel="stylesheet" href="static/bootstrap.css">
+	 <link rel="stylesheet" href="static/pictures.css">
+	 <script src="static/jquery-3.5.1.js">
+	 </script>
+	 <script>
+	 
+		// Pictures fade in and out NOT WORKING
+		$(document).ready(function(){
+			$("button").click(function(){
+				document.getElementById("img1").src = "static/surprise.png";
+				document.getElementById("img2").src = "static/surprise.png";
+				document.getElementById("img3").src = "static/surprise.png";
+				document.getElementById("img4").src = "static/surprise.png";
+				document.getElementById("img5").src = "static/surprise.png";
+				document.getElementById("img6").src = "static/surprise.png";
+			})
+		}) 
+		// Picutres fade in and out NOT WORKING
+		
+		// Stop alert changes background to green mouse enters
+		$(document).ready(function(){
+			$(".alert").mouseenter(function(){
+				$(this).css("background-color", "lightgreen");
+				console.log("background changed");
+			})
+		}) 
+		// Stop alert changes background to green when mouse enters
+		
+		// Stop alert changes background back to red when mouse exits
+		$(document).ready(function(){
+			$(".alert").mouseleave(function(){
+				$(this).css("background-color", "MistyRose");
+				console.log("background changed");
+			})
+		}) 
+		// Stop alert changes background back to red when mouse exits
+		
+	 </script>
+   </head>
+
+<body>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<h1><p class="text-center display-1">
+                Just some memories
+                {% if mood[num] == "sad" %}
+                    :(
+                {% endif %}
+                {% if mood[num] == "happy" %}
+                    :)
+                {% endif %}
+                {% if mood[num] == "angry" %}
+                    >:(
+                {% endif %}
+                {% if mood[num] == "surprised" %}
+                    :O
+                {% endif %}
+                {% if mood[num] == "chillin" %}
+                    ¯\_(ツ)_/¯
+                {% endif %}
+            </p></h1>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+	
+		<div class="row">
+		
+			<div class="col-sm-4">
+				<img id="img1" src="static/friends.jpg" alt="Friends!" class="img-fluid three-friends mx-auto d-block extra-margin fader">
+			</div>
+			
+			<div class="col-sm-4">
+				<img id="img2" src="static/three_friends.jpg" alt="Three Friends!" class="img-fluid three-friends mx-auto d-block fader">
+			</div>
+			
+			<div class="col-sm-4">
+				<img id="img3" src="static/graduation.jpg" alt="Graduating!" class="img-fluid three-friends mx-auto d-block more-margin fader">
+			</div>
+			
+		</div>
+		
+		<div class="row">
+			
+			<div class="col-sm-4">
+				<img id="img4" src="static/farm.jpg" alt="coworkers!" class="img-fluid three-friends mx-auto d-block more-margin fader">
+			</div>
+			
+			<div class="col-sm-4">
+				<img id="img5" src="static/city.jpg" alt="City!" class="img-fluid three-friends mx-auto d-block extra-margin fader">
+			</div>
+			
+			<div class="col-sm-4">
+				<img id="img6" src="static/coworkers.jpg" alt="Farm!" class="img-fluid three-friends mx-auto d-block extra-margin fader">
+			</div>
+			
+		</div>
+		
+		<div class="row text-center">
+			<div class="col-sm-12">
+				<button class="extra-margin">Click here for a surprise</button>
+			</div>
+		</div>
+		
+		<div class="alert alert-danger extra-margin" role="alert">
+			<h4 class="alert-heading">STOP!</h4>
+			<h6>Before you leave this page, you NEED to follow my insta <a href="https://www.instagram.com/puppydogs4days/">@puppydogs4days</a></h6>
+		</div>	
+		
+		<div class="row more-margin link-display">
+		
+			<div class="col-sm-4">
+				<div class="text-center">
+					<h3><a href="bootstrap_test.html">Homepage!</a></h3>
+				</div>
+			</div>
+
+			<div class="col-sm-4">
+				<div class="text-center">
+					<h3><a href="about_me.html">About Me!</a></h3>
+				</div>
+			</div>
+			
+			<div class="col-sm-4">
+				<div class="text-center">
+					<h3><a href="favorites.html">Favorites!</a></h3>
+				</div>
+			</div>
+			
+		</div>
+		
+	</div>
+
+</body>

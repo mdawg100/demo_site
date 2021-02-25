@@ -1,0 +1,55 @@
+body {
+	background-color: SteelBlue;
+}
+
+h1 {
+    color: Whitesmoke;
+    border-width: thick;
+    border-color: DarkGoldenRod;
+    border-style: solid;
+    padding: 10px;
+	background-color: Seagreen;
+	text-shadow: 2px 2px DarkGoldenRod;
+	font-family: "Brush Script MT", Times, serif;
+}
+
+.link-display {
+	background-color: Seagreen;
+	margin-top: 0;
+    border-width: thick;
+    border-color: DarkGoldenRod;
+    border-style: solid;
+}
+
+.table{
+    color: Whitesmoke;
+    border-width: thick;
+    border-color: DarkGoldenRod;
+    border-style: solid;
+    padding: 10px;
+	background-color: Seagreen;
+	margin-top: 20px;
+}
+
+.alert{
+	margin-top: 20px;
+}
+
+a {
+	color: navy;
+}
+
+h4 {
+	text-shadow: 2px 2px black;
+}
+
+img {
+	border-width: thick;
+    border-color: DarkGoldenRod;
+    border-style: solid;
+	margin: 20px;
+}
+
+button {
+	margin-bottom: 20px;
+}

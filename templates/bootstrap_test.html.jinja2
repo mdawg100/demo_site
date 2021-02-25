@@ -1,0 +1,135 @@
+<!doctype html>
+
+<html>
+
+   <head>
+     <title>My Homepage</title>
+	 <meta name="viewport" content="width=device-width, initial-scale=1"> <!--specifies sizing-->
+	 <link rel="stylesheet" href="static/bootstrap.css">
+	 <link rel="stylesheet" href="static/bootstrap_style.css">
+	 <script src="static/jquery-3.5.1.js">
+	 </script>
+	 <script>
+
+		// Stop alert changes background to green mouse enters
+		$(document).ready(function(){
+			$(".alert").mouseenter(function(){
+				$(this).css("background-color", "lightgreen");
+				console.log("background changed");
+			})
+		})
+		// Stop alert changes background to green when mouse enters
+
+		// Stop alert changes background back to red when mouse exits
+		$(document).ready(function(){
+			$(".alert").mouseleave(function(){
+				$(this).css("background-color", "MistyRose");
+				console.log("background changed");
+			})
+		})
+		// Stop alert changes background back to red when mouse exits
+
+		// interval
+		var myVar = setInterval(setColor, 50);
+
+		function setColor() {
+			var x = document.body;
+			x.style.backgroundColor = x.style.backgroundColor == "aquamarine" ? "LightGreen" : "aquamarine";
+		}
+
+		function stopColor() {
+			clearInterval(myVar);
+		}
+
+		$(document).ready(function(){
+			$("button").click(function(){
+				var txt1 = "<a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>Fine.</a>";
+				 $("#surprise-link").append(txt1);
+			})
+		})
+
+	 </script>
+	 <style>
+	 .center {
+	 text-align: center;
+	 }
+	 </style>
+   </head>
+
+<body>
+		<div class="container-fluid">
+
+			<div class="row">
+				<div class="col-sm-12">
+					<h1><p class="text-center">{{ name + "'s" }} Website</p></h1>
+				</div>
+			</div>
+
+			<div class="row">
+
+				<div class="col-sm-4">
+					<div class="card" style="width: 25rem;">
+						<img src="static/about_me.png" class="card-img-top" alt="about me!">
+						<div class="card-body">
+							<h3 class="card-title">ABOUT ME!</h3>
+							<p class="card-text">Want to get to know me? Good luck! I made up half of my backstory so that I stand out from the crowd. No one gets anywhere without a troubled youth and comeback story.</p>
+						</div>
+						<div class="card-body">
+							<a href="about_me.html" class="card-link">click here to learn more about me!</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-4">
+					<div class="card" style="width: 25rem;">
+						<img src="static/camera.jpg" class="card-img-top" alt="camera!">
+						<div class="card-body">
+							<h3 class="card-title">PICTURES!</h3>
+							<p class="card-text">It's important for a young influencer's life to appear more luxurious and care-free than the life of any potential viewer. Thus, I have cultivated a {{ num_pics }} photo library designed to make others feel inadequate.</p>
+						</div>
+						<div class="card-body">
+							<a href="pictures.html" class="card-link">click here to hate yourself!</a>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-4">
+					<div class="card" style="width: 25rem;">
+						<img src="static/favorites.jpg" class="card-img-top" alt="about me!">
+						<div class="card-body">
+							<h3 class="card-title">FAVORITES!</h3>
+							<p class="card-text">Here are the things that I love! I carefully chose them to make my personality seem more appealing.</p>
+						</div>
+						<div class="card-body">
+							<a href="favorites.html" class="card-link">click here to see the things you too should love!</a>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+
+			<div class="container-fluid no-padding">
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="text-center">
+							<img src="static/welcome.jpg" alt="Welcome to the team!">
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row text-center">
+				<div class="col-sm-12">
+					<button class="extra-extra-margin">secret link</button>
+				</div>
+			</div>
+
+			<div id="surprise-link" class="text-center extra-margin">
+			</div>
+
+		</div>
+</body>
+
+</html>
+
