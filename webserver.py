@@ -35,10 +35,11 @@ def main():
                     web.get('/about_me.html', aboutme),
                     web.get('/pictures.html', pictures),
                     web.get('/favorites.html', favorites),
+                    web.get('/', home),
                     web.static('/static', 'static')])
     print("webserver 1.0")
     # type in: host:port
-    web.run_app(app, host="127.0.0.1", port=3000)
+    web.run_app(app, host="0.0.0.0", port=80)
     # WHAT IF I WERE TO TYPE IN SOMEONE ELSE'S IP ADDRESS FOR HOST ^^^
 
 
