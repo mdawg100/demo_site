@@ -19,7 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89c8c483-306a-4fa7-ac6b-9ad6ee2f9219" name="Default Changelist" comment="database addition" />
+    <list default="true" id="89c8c483-306a-4fa7-ac6b-9ad6ee2f9219" name="Default Changelist" comment="database addition">
+      <change beforePath="$PROJECT_DIR$/sql_playground" beforeDir="false" afterPath="$PROJECT_DIR$/sql_playground.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,7 +46,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../6_weeks_practice" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/sql_playground.py" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -55,7 +57,29 @@
       <recent name="C:\Users\m214374\Desktop\2021 SPRING\EW432 MICRO\website\static" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.sql_playground">
+    <configuration name="sql_playground" type="PythonConfigurationType" factoryName="Python">
+      <module name="website" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\m214374\Anaconda3\envs\hacking\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sql_playground.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="webserver" type="PythonConfigurationType" factoryName="Python">
       <module name="website" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -78,6 +102,10 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.webserver" />
+      <item itemvalue="Python.sql_playground" />
+    </list>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -96,7 +124,7 @@
       <workItem from="1614023989672" duration="1635000" />
       <workItem from="1614137702220" duration="3901000" />
       <workItem from="1614615276263" duration="1655000" />
-      <workItem from="1614786822614" duration="3265000" />
+      <workItem from="1614786822614" duration="3648000" />
     </task>
     <task id="LOCAL-00001" summary="updated fav title">
       <created>1614615323032</created>
@@ -140,14 +168,19 @@
       <screen x="0" y="0" width="1280" height="720" />
     </state>
     <state x="380" y="185" key="#Notifications/0.0.1280.720/1920.-160.1920.1080@0.0.1280.720" timestamp="1614615755934" />
-    <state x="96" y="7" width="1089" height="713" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1612451582777">
+    <state x="96" y="0" width="1089" height="720" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1614872993676">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
+    <state x="96" y="0" width="1089" height="720" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.720/1920.-160.1920.1080@0.0.1280.720" timestamp="1614872993676" />
     <state x="96" y="7" width="1089" height="713" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1612451582777" />
-    <state x="421" y="119" key="FileChooserDialogImpl" timestamp="1614137727561">
+    <state x="386" y="163" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1614872764738">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state x="421" y="119" key="FileChooserDialogImpl/0.0.1280.720/1920.-160.1920.1080@0.0.1280.720" timestamp="1613163343028" />
+    <state x="386" y="163" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1280.720/1920.-160.1920.1080@0.0.1280.720" timestamp="1614872764738" />
+    <state x="421" y="119" key="FileChooserDialogImpl" timestamp="1614872992343">
+      <screen x="0" y="0" width="1280" height="720" />
+    </state>
+    <state x="421" y="119" key="FileChooserDialogImpl/0.0.1280.720/1920.-160.1920.1080@0.0.1280.720" timestamp="1614872992343" />
     <state x="2552" y="19" key="FileChooserDialogImpl/0.0.1280.720/1920.-160.1920.1080@1920.-160.1920.1080" timestamp="1613171672892" />
     <state x="421" y="119" key="FileChooserDialogImpl/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1612451581109" />
     <state x="421" y="119" key="FileChooserDialogImpl/0.0.1280.720@0.0.1280.720" timestamp="1614137727561" />
