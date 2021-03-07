@@ -7,24 +7,54 @@ from aiohttp import web
 import aiohttp_jinja2
 import jinja2
 import random
+import sqlite3
 
 @aiohttp_jinja2.template('bootstrap_test.html.jinja2')
 async def home(request):
-    return{"name": "Influencer", "num_pics": 6}
+    conn = sqlite3.connect('tweet.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM tweets ORDER BY likes DESC")
+    results = cursor.fetchall()
+    conn.close()
+    return{"tweets": results, "name": "Influencer", "num_pics": 6}
 
 @aiohttp_jinja2.template('pictures.html.jinja2')
 async def pictures(request):
-    return{"mood": ["sad", "happy", "angry", "surprised", "chillin"], "num": random.randint(0,len("mood"))}
+    conn = sqlite3.connect('tweet.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM tweets ORDER BY likes DESC")
+    results = cursor.fetchall()
+    conn.close()
+    return{"tweets": results, "mood": ["sad", "happy", "angry", "surprised", "chillin"], "num": random.randint(0,len("mood"))}
 
 @aiohttp_jinja2.template('about_me.html.jinja2')
 async def aboutme(request):
-    return{"places": ["Jalalabad", "Donetsk", "Vorkuta", "Ta'izz", "Bogota"]}
+    conn = sqlite3.connect('tweet.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM tweets ORDER BY likes DESC")
+    results = cursor.fetchall()
+    conn.close()
+    return{"tweets": results, "places": ["Jalalabad", "Donetsk", "Vorkuta", "Ta'izz", "Bogota"]}
 
 @aiohttp_jinja2.template('favorites.html.jinja2')
 async def favorites(request):
-    return{"books": ["Fahrenheit 451", "To Kill a Mockingbird", "Catch 22", "Catcher in the Rye",
+    conn = sqlite3.connect('tweet.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM tweets ORDER BY likes DESC")
+    results = cursor.fetchall()
+    conn.close()
+    return{"tweets": results, "books": ["Fahrenheit 451", "To Kill a Mockingbird", "Catch 22", "Catcher in the Rye",
                      "For Whom the Bell Tolls"],
            "num": random.randint(0,len("mood"))}
+
+@aiohttp_jinja2.template('tweets.html.jinja2')
+async def tweets(request):
+    conn = sqlite3.connect('tweet.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM tweets ORDER BY likes DESC")
+    results = cursor.fetchall()
+    conn.close()
+    return{"tweets": results}
 
 def main():
 
@@ -36,10 +66,12 @@ def main():
                     web.get('/pictures.html', pictures),
                     web.get('/favorites.html', favorites),
                     web.get('/', home),
+                    web.get('/tweets', tweets),
                     web.static('/static', 'static')])
     print("webserver 1.0")
     # type in: host:port
-    web.run_app(app, host="0.0.0.0", port=80)
+    #web.run_app(app, host="0.0.0.0", port=80)
+    web.run_app(app, host="127.0.0.1", port=3000)
     # WHAT IF I WERE TO TYPE IN SOMEONE ELSE'S IP ADDRESS FOR HOST ^^^
 
 
