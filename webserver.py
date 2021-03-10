@@ -56,6 +56,32 @@ async def tweets(request):
     conn.close()
     return{"tweets": results}
 
+async def add_tweet(request):
+    data = await request.post()
+    content = data['content']
+    # INSERT INTO tweets(content, likes) VALUES ('new tweet!',0);
+    query = "INSERT INTO tweets(content, likes) VALUES (\"%s\", 0)" % content
+    print("QUERY: %s" % query)
+    conn = sqlite3.connect('tweet.db')
+    cursor = conn.cursor()
+    cursor.execute(query)
+    conn.commit()
+    print("The user tweeted: %s" % data['content'])
+    raise web.HTTPFound('/tweets')
+
+async def like(request):
+    conn = sqlite3.connect('tweet.db')
+    cursor = conn.cursor()
+    id = str(request.query['id'])
+    # get the current like count
+    cursor.execute("SELECT likes FROM tweets WHERE id=%s" % id)
+    like_count = cursor.fetchone()[0]
+    # add one to like count and save it
+    cursor.execute("UPDATE tweets SET likes=%d WHERE id=%s" % (like_count + 1, id))
+    conn.commit()
+    conn.close()
+    raise web.HTTPFound('/tweets')
+
 def main():
 
     app = web.Application()
@@ -67,7 +93,9 @@ def main():
                     web.get('/favorites.html', favorites),
                     web.get('/', home),
                     web.get('/tweets', tweets),
-                    web.static('/static', 'static')])
+                    web.static('/static', 'static'),
+                    web.post('/tweet', add_tweet),
+                    web.get('/like', like)])
     print("webserver 1.0")
     # type in: host:port
     #web.run_app(app, host="0.0.0.0", port=80)

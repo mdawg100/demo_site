@@ -49,13 +49,19 @@
         <div class="card">
                 <ul>
                     {% for tweet in tweets %}
-                        <li><b>{{ tweet[3] }}:</b> {{ tweet[0] }}.</li>
+                        <li><b>{{ tweet[3] }}:</b> {{ tweet[0] }}</li>
                         <ul>
                             <li><i>Likes:</i> {{ tweet[2] }}</li>
+                            <li> <a class="btn btn-primary" href="/like?id={{ tweet[4] }}">Like!</a></li>
                         </ul>
                     {% endfor %}
                 </ul>
         </div>
+
+        <form action="/tweet" method="post" class="text-center">
+            <input name="content" type="text">
+            <input type="submit" value="talk about it!">
+        </form>
 
     <div class="row more-margin link-display">
 
