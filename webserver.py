@@ -72,12 +72,12 @@ async def add_tweet(request):
 async def like(request):
     conn = sqlite3.connect('tweet.db')
     cursor = conn.cursor()
-    id = str(request.query['id'])
+    tweet_id = str(request.query['id'])
     # get the current like count
-    cursor.execute("SELECT likes FROM tweets WHERE id=%s" % id)
+    cursor.execute("SELECT likes FROM tweets WHERE id=%s" % tweet_id)
     like_count = cursor.fetchone()[0]
     # add one to like count and save it
-    cursor.execute("UPDATE tweets SET likes=%d WHERE id=%s" % (like_count + 1, id))
+    cursor.execute("UPDATE tweets SET likes=%d WHERE id=%s" % (like_count + 1, tweet_id))
     conn.commit()
     conn.close()
     raise web.HTTPFound('/tweets')
@@ -98,8 +98,8 @@ def main():
                     web.get('/like', like)])
     print("webserver 1.0")
     # type in: host:port
-    #web.run_app(app, host="0.0.0.0", port=80)
-    web.run_app(app, host="127.0.0.1", port=3000)
+    web.run_app(app, host="0.0.0.0", port=80)
+    #web.run_app(app, host="127.0.0.1", port=3000)
     # WHAT IF I WERE TO TYPE IN SOMEONE ELSE'S IP ADDRESS FOR HOST ^^^
 
 

@@ -20,10 +20,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="89c8c483-306a-4fa7-ac6b-9ad6ee2f9219" name="Default Changelist" comment="database addition">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/tweets.html.jinja2" beforeDir="false" afterPath="$PROJECT_DIR$/templates/tweets.html.jinja2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/webserver.py" beforeDir="false" afterPath="$PROJECT_DIR$/webserver.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -128,7 +124,7 @@
       <workItem from="1614023989672" duration="1635000" />
       <workItem from="1614137702220" duration="3901000" />
       <workItem from="1614615276263" duration="1655000" />
-      <workItem from="1614786822614" duration="21518000" />
+      <workItem from="1614786822614" duration="22163000" />
     </task>
     <task id="LOCAL-00001" summary="updated fav title">
       <created>1614615323032</created>
@@ -192,31 +188,31 @@
     <state x="2552" y="19" key="FileChooserDialogImpl/0.0.1280.720/1920.-160.1920.1080@1920.-160.1920.1080" timestamp="1613171672892" />
     <state x="421" y="119" key="FileChooserDialogImpl/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1612451581109" />
     <state x="421" y="119" key="FileChooserDialogImpl/0.0.1280.720@0.0.1280.720" timestamp="1615064461824" />
-    <state width="1237" height="168" key="GridCell.Tab.0.bottom" timestamp="1615393409739">
+    <state width="1237" height="168" key="GridCell.Tab.0.bottom" timestamp="1615393545318">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="1237" height="168" key="GridCell.Tab.0.bottom/0.0.1280.720/1920.-160.1920.1080@0.0.1280.720" timestamp="1615393409739" />
+    <state width="1237" height="168" key="GridCell.Tab.0.bottom/0.0.1280.720/1920.-160.1920.1080@0.0.1280.720" timestamp="1615393545318" />
     <state width="1237" height="166" key="GridCell.Tab.0.bottom/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1613580471655" />
     <state width="1877" height="294" key="GridCell.Tab.0.bottom/0.0.1280.720/1920.0.1920.1080@1920.0.1920.1080" timestamp="1613071839373" />
     <state width="596" height="166" key="GridCell.Tab.0.bottom/0.0.1280.720@0.0.1280.720" timestamp="1614272098389" />
-    <state width="1237" height="168" key="GridCell.Tab.0.center" timestamp="1615393409739">
+    <state width="1237" height="168" key="GridCell.Tab.0.center" timestamp="1615393545318">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="1237" height="168" key="GridCell.Tab.0.center/0.0.1280.720/1920.-160.1920.1080@0.0.1280.720" timestamp="1615393409739" />
+    <state width="1237" height="168" key="GridCell.Tab.0.center/0.0.1280.720/1920.-160.1920.1080@0.0.1280.720" timestamp="1615393545318" />
     <state width="1237" height="166" key="GridCell.Tab.0.center/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1613580471655" />
     <state width="1877" height="294" key="GridCell.Tab.0.center/0.0.1280.720/1920.0.1920.1080@1920.0.1920.1080" timestamp="1613071839373" />
     <state width="596" height="166" key="GridCell.Tab.0.center/0.0.1280.720@0.0.1280.720" timestamp="1614272098389" />
-    <state width="1237" height="168" key="GridCell.Tab.0.left" timestamp="1615393409739">
+    <state width="1237" height="168" key="GridCell.Tab.0.left" timestamp="1615393545318">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="1237" height="168" key="GridCell.Tab.0.left/0.0.1280.720/1920.-160.1920.1080@0.0.1280.720" timestamp="1615393409739" />
+    <state width="1237" height="168" key="GridCell.Tab.0.left/0.0.1280.720/1920.-160.1920.1080@0.0.1280.720" timestamp="1615393545318" />
     <state width="1237" height="166" key="GridCell.Tab.0.left/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1613580471654" />
     <state width="1877" height="294" key="GridCell.Tab.0.left/0.0.1280.720/1920.0.1920.1080@1920.0.1920.1080" timestamp="1613071839372" />
     <state width="596" height="166" key="GridCell.Tab.0.left/0.0.1280.720@0.0.1280.720" timestamp="1614272098389" />
-    <state width="1237" height="168" key="GridCell.Tab.0.right" timestamp="1615393409739">
+    <state width="1237" height="168" key="GridCell.Tab.0.right" timestamp="1615393545318">
       <screen x="0" y="0" width="1280" height="720" />
     </state>
-    <state width="1237" height="168" key="GridCell.Tab.0.right/0.0.1280.720/1920.-160.1920.1080@0.0.1280.720" timestamp="1615393409739" />
+    <state width="1237" height="168" key="GridCell.Tab.0.right/0.0.1280.720/1920.-160.1920.1080@0.0.1280.720" timestamp="1615393545318" />
     <state width="1237" height="166" key="GridCell.Tab.0.right/0.0.1280.720/1920.0.1920.1080@0.0.1280.720" timestamp="1613580471655" />
     <state width="1877" height="294" key="GridCell.Tab.0.right/0.0.1280.720/1920.0.1920.1080@1920.0.1920.1080" timestamp="1613071839373" />
     <state width="596" height="166" key="GridCell.Tab.0.right/0.0.1280.720@0.0.1280.720" timestamp="1614272098389" />
@@ -247,6 +243,6 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/website$sql_playground.coverage" NAME="sql_playground Coverage Results" MODIFIED="1615143242617" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/website$webserver.coverage" NAME="webserver Coverage Results" MODIFIED="1615393409730" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/website$webserver.coverage" NAME="webserver Coverage Results" MODIFIED="1615393545308" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
