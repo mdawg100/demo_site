@@ -1,19 +1,2 @@
 tweet.db
 tweet.db-journal
-
-{% for tweet in tweets %}
-    <div class="card container-fluid">
-        <div class="card-title">
-            <b>From: {{ tweet[3] }}</b>
-        </div>
-        <div class="card-body">
-            {{ tweet[0] }}
-        </div>
-        <div class="card-footer">
-            <i>Likes:</i> {{ tweet[2] }}
-        </div>
-        <div class="card-footer">
-            <a class="btn btn-primary" href="/like?id={{ tweet[4] }}">Like!</a>
-        </div>
-    </div>
-{% endfor %}
