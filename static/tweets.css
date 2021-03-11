@@ -1,12 +1,13 @@
 h1 {
-    color:  yellow;
+    color: #293250;
     border-width: thick;
-    border-color: darkred;
+    border-color: #6DD47E;
     border-style: solid;
     padding: 10px;
-	background-color: orange;
-	text-shadow: 3px 3px darkred;
+	background-color:  #FFD55A;
+	text-shadow: 3px 3px #6DD47E;
 	font-family: "Lucida Console", Times, serif;
+	margin-bottom: 50px;
 }
 
 ul {
@@ -14,26 +15,31 @@ ul {
 }
 
 .card {
-        margin-bottom: 10px;
-		background-color: orange;
+        margin-bottom: 50px;
+		background-color: #FFD55A;
 		border-width: thick;
-		border-color: darkred;
+		border-color: #6DD47E;
 		border-style: solid;
-}
-
-h2 {
-	color: DarkMagenta;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+		padding: 16px
 }
 
 body {
-	background-color: darkorange;
+	background-color: #293250;
+}
+
+form {
+	margin-bottom: 50px;
+}
+
+h2{
+	color: black;
 }
 
 .no-padding {
 	padding-left: 0;
 	padding-right: 0;
 }
-
 
 img {
 		border-width: thick;
@@ -49,4 +55,8 @@ img {
 	margin-top: 500;
 }
 
+.btn-success, .btn-success:hover, .btn-success:active, .btn-success:visited, .btn-success {
+    background-color: #6DD47E; !important;
+	color: black; !important;
+}
 

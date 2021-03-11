@@ -2,93 +2,105 @@
 
 <html>
 
-   <head>
-     <title>My Homepage</title>
-	 <meta name="viewport" content="width=device-width, initial-scale=1"> <!--specifies sizing-->
-	 <link rel="stylesheet" href="static/bootstrap.css">
-	 <link rel="stylesheet" href="static/tweets.css">
-	 <script src="static/jquery-3.5.1.js">
-	 </script>
-	 <script>
+<head>
+    <title>My Homepage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!--specifies sizing-->
+    <link rel="stylesheet" href="static/bootstrap.css">
+    <link rel="stylesheet" href="static/tweets.css">
+    <script src="static/jquery-3.5.1.js">
+    </script>
+    <script>
 
-		// Stop alert changes background to green mouse enters
-		$(document).ready(function(){
-			$(".alert").mouseenter(function(){
-				$(this).css("background-color", "lightgreen");
-				console.log("background changed");
-			})
-		})
-		// Stop alert changes background to green when mouse enters
+        // Stop alert changes background to green mouse enters
+        $(document).ready(function () {
+            $(".alert").mouseenter(function () {
+                $(this).css("background-color", "lightgreen");
+                console.log("background changed");
+            })
+        })
+        // Stop alert changes background to green when mouse enters
 
-		// Stop alert changes background back to red when mouse exits
-		$(document).ready(function(){
-			$(".alert").mouseleave(function(){
-				$(this).css("background-color", "MistyRose");
-				console.log("background changed");
-			})
-		})
-		// Stop alert changes background back to red when mouse exits
+        // Stop alert changes background back to red when mouse exits
+        $(document).ready(function () {
+            $(".alert").mouseleave(function () {
+                $(this).css("background-color", "MistyRose");
+                console.log("background changed");
+            })
+        })
+        // Stop alert changes background back to red when mouse exits
 
-		$(document).ready(function(){
-			$("button").click(function(){
-				var txt1 = "<a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>Fine.</a>";
-				 $("#surprise-link").append(txt1);
-			})
-		})
+        $(document).ready(function () {
+            $("button").click(function () {
+                var txt1 = "<a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>Fine.</a>";
+                $("#surprise-link").append(txt1);
+            })
+        })
 
-	 </script>
-	 <style>
-	 .center {
-	 text-align: center;
-	 }
-	 </style>
-   </head>
+    </script>
+    <style>
+        .center {
+            text-align: center;
+        }
+    </style>
+</head>
 
-    <body>
-        <h1>TWEETS!</h1>
-        <div class="card">
-                <ul>
-                    {% for tweet in tweets %}
-                        <li><b>{{ tweet[3] }}:</b> {{ tweet[0] }}</li>
-                        <ul>
-                            <li><i>Likes:</i> {{ tweet[2] }}</li>
-                            <li> <a class="btn btn-primary" href="/like?id={{ tweet[4] }}">Like!</a></li>
-                        </ul>
-                    {% endfor %}
-                </ul>
+<body>
+<h1 class="center">TWEETS!</h1>
+
+<form action="/tweet" method="post" class="text-center">
+    <input name="content" type="text">
+    <input type="submit" value="talk about it!">
+</form>
+
+{% for tweet in tweets %}
+    <div class="card container-fluid">
+        <div class="card-title">
+            <b><h3>From: {{ tweet[3] }}</h3></b>
         </div>
+        <div class="card-body">
+            <h5>{{ tweet[0] }}</h5>
+        </div>
+        <div class="card-footer">
+            <i>Likes:</i> <b>{{ tweet[2] }}</b>
+        </div>
+        <div class="card-footer">
+            <a class="btn btn-success" href="/like?id={{ tweet[4] }}">Like!</a>
+        </div>
+    </div>
+{% endfor %}
 
-        <form action="/tweet" method="post" class="text-center">
-            <input name="content" type="text">
-            <input type="submit" value="talk about it!">
-        </form>
 
-    <div class="row more-margin link-display">
+<form action="/tweet" method="post" class="text-center">
+    <input name="content" type="text">
+    <input type="submit" value="talk about it!">
+</form>
 
-		<div class="col-sm-3">
-			<div class="text-center">
-				<h3><a href="bootstrap_test.html">Homepage!</a></h3>
-			</div>
-		</div>
+<div class="row more-margin link-display">
 
-		<div class="col-sm-3">
-			<div class="text-center">
-				<h3><a href="about_me.html">About Me!</a></h3>
-			</div>
-		</div>
+    <div class="col-sm-3">
+        <div class="text-center">
+            <h3><a href="bootstrap_test.html">Homepage!</a></h3>
+        </div>
+    </div>
 
-		<div class="col-sm-3">
-			<div class="text-center">
-				<h3><a href="pictures.html">Pictures!</a></h3>
-			</div>
-		</div>
+    <div class="col-sm-3">
+        <div class="text-center">
+            <h3><a href="about_me.html">About Me!</a></h3>
+        </div>
+    </div>
 
-        <div class="col-sm-3">
-			<div class="text-center">
-				<h3><a href="favorites.html">Favorites!</a></h3>
-			</div>
-		</div>
+    <div class="col-sm-3">
+        <div class="text-center">
+            <h3><a href="pictures.html">Pictures!</a></h3>
+        </div>
+    </div>
 
-	</div>
+    <div class="col-sm-3">
+        <div class="text-center">
+            <h3><a href="favorites.html">Favorites!</a></h3>
+        </div>
+    </div>
 
-    </body>
+</div>
+
+</body>
