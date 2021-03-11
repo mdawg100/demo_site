@@ -8,9 +8,11 @@ import aiohttp_jinja2
 import jinja2
 import random
 import sqlite3
+import requests
 
 @aiohttp_jinja2.template('bootstrap_test.html.jinja2')
 async def home(request):
+    print("user is comign from %s" % request.remote)
     conn = sqlite3.connect('tweet.db')
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM tweets ORDER BY likes DESC")
@@ -58,13 +60,13 @@ async def tweets(request):
 
 async def add_tweet(request):
     data = await request.post()
+    ip = request.remote
+    location = get_location(ip)
     content = data['content']
     # INSERT INTO tweets(content, likes) VALUES ('new tweet!',0);
-    query = "INSERT INTO tweets(content, likes) VALUES (\"%s\", 0)" % content
-    print("QUERY: %s" % query)
     conn = sqlite3.connect('tweet.db')
     cursor = conn.cursor()
-    cursor.execute(query)
+    cursor.execute("INSERT INTO tweets(content, likes, location) VALUES (?, 0, ?)",  (content, location))
     conn.commit()
     print("The user tweeted: %s" % data['content'])
     raise web.HTTPFound('/tweets')
@@ -74,10 +76,11 @@ async def like(request):
     cursor = conn.cursor()
     tweet_id = str(request.query['id'])
     # get the current like count
-    cursor.execute("SELECT likes FROM tweets WHERE id=%s" % tweet_id)
+    # even if a single value being input, still needs to be in a list
+    cursor.execute("SELECT likes FROM tweets WHERE id=?",  (tweet_id,))
     like_count = cursor.fetchone()[0]
     # add one to like count and save it
-    cursor.execute("UPDATE tweets SET likes=%d WHERE id=%s" % (like_count + 1, tweet_id))
+    cursor.execute("UPDATE tweets SET likes=? WHERE id=?", (like_count + 1, tweet_id))
     conn.commit()
     conn.close()
     raise web.HTTPFound('/tweets')
@@ -99,13 +102,22 @@ def main():
     print("webserver 1.0")
     # type in: host:port
     # choose one of the below for either actual website or self-testing
-    web.run_app(app, host="0.0.0.0", port=80)
-    # web.run_app(app, host="127.0.0.1", port=3000)
+    # web.run_app(app, host="0.0.0.0", port=80)
+    web.run_app(app, host="127.0.0.1", port=3000)
 
     # in the SSH console to update all changes:
     # git pull
     # sudo systemctl restart webserver
 
+    # tweet",10)-- to control the likes
+
+def get_location(ip_address):
+
+    api_key = "ef864d79b484fc119c87882e7257cf8b"
+
+    result = requests.get("http://api.ipstack.com/%s?access_key=%s" % (ip_address, api_key))
+    data = result.json()
+    return "%s, %s" % (data["city"], data["region_code"])
 
 if __name__=="__main__":
     main()
