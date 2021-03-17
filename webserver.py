@@ -117,8 +117,8 @@ def main():
     print("webserver 1.0")
     # type in: host:port
     # choose one of the below for either actual website or self-testing
-    # web.run_app(app, host="0.0.0.0", port=80)
-    web.run_app(app, host="127.0.0.1", port=3000)
+    web.run_app(app, host="0.0.0.0", port=80)
+    # web.run_app(app, host="127.0.0.1", port=3000)
 
     # in the SSH console to update all changes:
     # git pull
