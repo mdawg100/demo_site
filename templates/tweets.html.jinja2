@@ -36,6 +36,28 @@
             })
         })
 
+        $(document).ready(function(){
+            $(".like-btn").click(function(){
+                // a like button was clicked, but which one?
+                let btn = $(this);
+                let tweet_id = btn.attr("data-tweet-id");
+                console.log("you liked a tweet id", tweet_id);
+                // this goes to the below URL and grabs the data using the like_json path in webserver
+                // but without changing the actual displayed webpage
+                $.get("/like.json?id=" + tweet_id, function(data){
+                    console.log(data);
+                    let like_count = $("#tweet-like-count-"+tweet_id)
+                    like_count.fadeOut(200);
+                    setTimeout(function(){
+                        // like_count is hidden
+                        like_count.html(data.like_count);
+                        // show it again
+                        like_count.fadeIn(1000);
+                    },200)
+                })
+            })
+        })
+
     </script>
     <style>
         .center {
@@ -61,10 +83,12 @@
             <h5>{{ tweet[0] }}</h5>
         </div>
         <div class="card-footer">
-            <i>Likes:</i> <b>{{ tweet[2] }}</b>
+            <i>Likes:</i> <b id="tweet-like-count-{{ tweet[4] }}">{{ tweet[2] }}</b>
         </div>
         <div class="card-footer">
-            <a class="btn btn-success" href="/like?id={{ tweet[4] }}">Like!</a>
+           <!-- like button -->
+            <span class="btn btn-success like-btn" data-tweet-id = "{{ tweet[4] }}">Like!</span>
+            <!-- <a class="btn btn-success" href="/like?id={{ tweet[4] }}">Like!</a> -->
         </div>
     </div>
 {% endfor %}

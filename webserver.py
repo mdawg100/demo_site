@@ -85,6 +85,20 @@ async def like(request):
     conn.close()
     raise web.HTTPFound('/tweets')
 
+def like_json(request):
+    conn = sqlite3.connect('tweet.db')
+    cursor = conn.cursor()
+    tweet_id = str(request.query['id'])
+    # get the current like count
+    # even if a single value being input, still needs to be in a list
+    cursor.execute("SELECT likes FROM tweets WHERE id=?",  (tweet_id,))
+    like_count = cursor.fetchone()[0]
+    # add one to like count and save it
+    cursor.execute("UPDATE tweets SET likes=? WHERE id=?", (like_count + 1, tweet_id))
+    conn.commit()
+    conn.close()
+    return web.json_response(data={"like_count": like_count + 1})
+
 def main():
 
     app = web.Application()
@@ -98,12 +112,13 @@ def main():
                     web.get('/tweets', tweets),
                     web.static('/static', 'static'),
                     web.post('/tweet', add_tweet),
-                    web.get('/like', like)])
+                    web.get('/like', like),
+                    web.get('/like.json', like_json)])
     print("webserver 1.0")
     # type in: host:port
     # choose one of the below for either actual website or self-testing
-    web.run_app(app, host="0.0.0.0", port=80)
-    # web.run_app(app, host="127.0.0.1", port=3000)
+    # web.run_app(app, host="0.0.0.0", port=80)
+    web.run_app(app, host="127.0.0.1", port=3000)
 
     # in the SSH console to update all changes:
     # git pull
