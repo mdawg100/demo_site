@@ -9,16 +9,19 @@ import jinja2
 import random
 import sqlite3
 import requests
+import random
 
-@aiohttp_jinja2.template('bootstrap_test.html.jinja2')
+# @aiohttp_jinja2.template('bootstrap_test.html.jinja2')
 async def home(request):
-    print("user is comign from %s" % request.remote)
+    print("user is coming from %s" % request.remote)
     conn = sqlite3.connect('tweet.db')
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM tweets ORDER BY likes DESC")
     results = cursor.fetchall()
-    conn.close()
-    return{"tweets": results, "name": "Influencer", "num_pics": 6}
+    context = {"results": results, "lucky_number": random.randint(0,100), "name": "Influencer"}
+    response = aiohttp_jinja2.render_template('bootstrap_test.html.jinja2', request, context)
+    response.set_cookie('logged_in', 'yes')
+    return response
 
 @aiohttp_jinja2.template('pictures.html.jinja2')
 async def pictures(request):
@@ -59,6 +62,20 @@ async def tweets(request):
     return{"tweets": results}
 
 async def add_tweet(request):
+    print("logged in?")
+    data = await request.post()
+    ip = request.remote
+    location = get_location(ip)
+    content = data['content']
+    # INSERT INTO tweets(content, likes) VALUES ('new tweet!',0);
+    conn = sqlite3.connect('tweet.db')
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO tweets(content, likes, location) VALUES (?, 0, ?)",  (content, location))
+    conn.commit()
+    print("The user tweeted: %s" % data['content'])
+    raise web.HTTPFound('/tweets')
+
+async def comment(request):
     data = await request.post()
     ip = request.remote
     location = get_location(ip)
@@ -112,13 +129,14 @@ def main():
                     web.get('/tweets', tweets),
                     web.static('/static', 'static'),
                     web.post('/tweet', add_tweet),
+                    web.post('/comment', comment),
                     web.get('/like', like),
                     web.get('/like.json', like_json)])
     print("webserver 1.0")
     # type in: host:port
     # choose one of the below for either actual website or self-testing
-    web.run_app(app, host="0.0.0.0", port=80)
-    # web.run_app(app, host="127.0.0.1", port=3000)
+    # web.run_app(app, host="0.0.0.0", port=80)
+    web.run_app(app, host="127.0.0.1", port=3000)
 
     # in the SSH console to update all changes:
     # git pull

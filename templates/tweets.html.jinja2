@@ -13,7 +13,7 @@
 
         // Stop alert changes background to green mouse enters
         $(document).ready(function () {
-            $(".alert").mouseenter(function () {
+            $(".submit-tweet").mouseenter(function () {
                 $(this).css("background-color", "lightgreen");
                 console.log("background changed");
             })
@@ -22,19 +22,24 @@
 
         // Stop alert changes background back to red when mouse exits
         $(document).ready(function () {
-            $(".alert").mouseleave(function () {
-                $(this).css("background-color", "MistyRose");
+            $(".submit-tweet").mouseleave(function () {
+                $(this).css("background-color", "White");
                 console.log("background changed");
             })
         })
         // Stop alert changes background back to red when mouse exits
 
+        {% for tweet in tweets %}
         $(document).ready(function () {
-            $("button").click(function () {
-                var txt1 = "<a href='https://www.youtube.com/watch?v=dQw4w9WgXcQ'>Fine.</a>";
-                $("#surprise-link").append(txt1);
+            $("#comment-btn-{{ tweet[4] }}").click(function(){
+                var txt1 = "<form action=\"/comment\" method=\"post\">\n" +
+                            "    <input name=\"content\" type=\"text\">\n" +
+                            "    <input type=\"submit\" value=\"Post comment!\" class=\"submit-tweet\">\n" +
+                            "</form>";
+                $("#{{ tweet[4] }}").append(txt1);
             })
         })
+        {% endfor %}
 
         $(document).ready(function(){
             $(".like-btn").click(function(){
@@ -71,13 +76,13 @@
 
 <form action="/tweet" method="post" class="text-center">
     <input name="content" type="text">
-    <input type="submit" value="talk about it!">
+    <input type="submit" value="talk about it!" class="submit-tweet">
 </form>
 
 {% for tweet in tweets %}
     <div class="card container-fluid">
         <div class="card-title">
-            <b><h3>From: {{ tweet[3] }}</h3></b>
+            <b><h5><u>#{{ tweet[4] }}</u> From: {{ tweet[3] }}</h5></b>
         </div>
         <div class="card-body">
             <h5>{{ tweet[0] }}</h5>
@@ -89,10 +94,15 @@
            <!-- like button -->
             <span class="btn btn-success like-btn" data-tweet-id = "{{ tweet[4] }}">Like!</span>
             <!-- <a class="btn btn-success" href="/like?id={{ tweet[4] }}">Like!</a> -->
+            <span class="btn btn-success" id="comment-btn-{{ tweet[4] }}">Comment!</span>
+        </div>
+        <div class="card-footer" id="{{ tweet[4] }}">
         </div>
     </div>
 {% endfor %}
 
+<div class="card-footer" id="surprise-link">
+</div>
 
 <form action="/tweet" method="post" class="text-center">
     <input name="content" type="text">
