@@ -59,11 +59,16 @@ async def tweets(request):
     cursor.execute("SELECT * FROM tweets ORDER BY likes DESC")
     results = cursor.fetchall()
     conn.close()
-    return{"tweets": results}
+    conn = sqlite3.connect('comment.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM comment ORDER BY likes DESC")
+    comments = cursor.fetchall()
+    return{"tweets": results, "comments": comments}
 
 async def add_tweet(request):
     print("logged in?")
     data = await request.post()
+    print(data)
     ip = request.remote
     location = get_location(ip)
     content = data['content']
@@ -77,15 +82,17 @@ async def add_tweet(request):
 
 async def comment(request):
     data = await request.post()
+    id = data['content'][0]
     ip = request.remote
     location = get_location(ip)
-    content = data['content']
+    content = data['content'][1:]
     # INSERT INTO tweets(content, likes) VALUES ('new tweet!',0);
-    conn = sqlite3.connect('tweet.db')
+    conn = sqlite3.connect('comment.db')
     cursor = conn.cursor()
-    cursor.execute("INSERT INTO tweets(content, likes, location) VALUES (?, 0, ?)",  (content, location))
+    cursor.execute("INSERT INTO comment(content, tweet_id, likes, location) VALUES (?, ?, 0, ?)",  (content, id, location))
     conn.commit()
-    print("The user tweeted: %s" % data['content'])
+    print("The user commented: %s" % data['content'][1:])
+    print("The tweet id is: %s" % data['content'][0])
     raise web.HTTPFound('/tweets')
 
 async def like(request):

@@ -32,11 +32,16 @@
         {% for tweet in tweets %}
         $(document).ready(function () {
             $("#comment-btn-{{ tweet[4] }}").click(function(){
-                var txt1 = "<form action=\"/comment\" method=\"post\">\n" +
-                            "    <input name=\"content\" type=\"text\">\n" +
+                var txt1 = "<form action=\"/comment\" method=\"post\" id=\"{{ tweet[4] }}\">\n" +
+                            "    <input name=\"content\" type=\"text\" id=\"comment_{{ tweet[4] }}\">\n" +
                             "    <input type=\"submit\" value=\"Post comment!\" class=\"submit-tweet\">\n" +
                             "</form>";
                 $("#{{ tweet[4] }}").append(txt1);
+
+                $('#{{ tweet[4] }}').submit(function() {
+                    var txt = document.getElementById('comment_{{ tweet[4] }}');
+                    txt.value = "{{ tweet[4] }}" + txt.value
+                })
             })
         })
         {% endfor %}
@@ -96,6 +101,13 @@
             <!-- <a class="btn btn-success" href="/like?id={{ tweet[4] }}">Like!</a> -->
             <span class="btn btn-success" id="comment-btn-{{ tweet[4] }}">Comment!</span>
         </div>
+            {%  for comment in comments %}
+            {%  if tweet[4] == comment[1] %}
+                <div class="card-footer">
+                    <h6>{{ comment[3] }} says: <b>{{ comment[0] }}</b></h6>
+                </div>
+            {% endif %}
+            {% endfor %}
         <div class="card-footer" id="{{ tweet[4] }}">
         </div>
     </div>
