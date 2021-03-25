@@ -1,0 +1,30 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"> <!--specifies sizing-->
+    <link rel="stylesheet" href="static/bootstrap.css">
+    <link rel="stylesheet" href="static/tweets.css">
+    <script src="static/jquery-3.5.1.js">
+    </script>
+</head>
+
+<body>
+<h1 class="center text-center">LOGIN!</h1>
+
+<form action="/login" method="post" class="text-center">
+    <div>
+    <label for="username">Username:</label>
+    <input name="username" type="text" id="username">
+    </div>
+
+    <div>
+    <label for="password">Password:</label>
+    <input name="password" type="password" id="password">
+    </div>
+
+    <input type="submit" value="login" class="submit-tweet">
+</form>
+</body>
