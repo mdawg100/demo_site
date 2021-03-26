@@ -40,7 +40,7 @@
 
                 $('#{{ tweet[4] }}').submit(function() {
                     var txt = document.getElementById('comment_{{ tweet[4] }}');
-                    txt.value = "{{ tweet[4] }}" + txt.value
+                    txt.value = "{{ tweet[4] }}" + "&" + txt.value
                 })
             })
         })

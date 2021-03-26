@@ -98,18 +98,20 @@ async def add_tweet(request):
 
 async def comment(request):
     data = await request.post()
-    id = data['content'][0]
+    string = data['content']
+    print("string is: %s" % string)
+    new_data = string.split('&')
+    id = new_data[0]
+    print("id is: %s" % id)
+    content = new_data[1]
     ip = request.remote
     location = get_location(ip)
-    content = data['content'][1:]
     # INSERT INTO tweets(content, likes) VALUES ('new tweet!',0);
     conn = sqlite3.connect('tweet.db')
     cursor = conn.cursor()
     cursor.execute("INSERT INTO comment(content, tweet_id, likes, location) VALUES (?, ?, 0, ?)",
                    (content, id, location))
     conn.commit()
-    print("The user commented: %s" % data['content'][1:])
-    print("The tweet id is: %s" % data['content'][0])
     raise web.HTTPFound('/tweets')
 
 
