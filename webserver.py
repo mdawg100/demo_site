@@ -74,13 +74,13 @@ async def favorites(request):
 async def tweets(request):
     conn = sqlite3.connect('tweet.db')
     cursor = conn.cursor()
+    # does the user have the cookie at all? if not, send them back to login
+    if "logged_in" not in request.cookies:
+        raise web.HTTPFound('/login')
     cursor.execute("SELECT username FROM users WHERE cookie=?", (request.cookies["logged_in"],))
     result = cursor.fetchone()
     # if they have a cookie, but it isn't in the database
     if result is None:
-        raise web.HTTPFound('/login')
-    # does the user have the cookie at all? if not, send them back to login
-    if "logged_in" not in request.cookies:
         raise web.HTTPFound('/login')
     # END check for cookie
     cursor.execute("SELECT * FROM tweets ORDER BY likes DESC")
@@ -279,8 +279,8 @@ def main():
     print("webserver 1.0")
     # type in: host:port
     # choose one of the below for either actual website or self-testing
-    web.run_app(app, host="0.0.0.0", port=80)
-    # web.run_app(app, host="127.0.0.1", port=3000)
+    # web.run_app(app, host="0.0.0.0", port=80)
+    web.run_app(app, host="127.0.0.1", port=3000)
 
     # in the SSH console to update all changes:
     # git pull
