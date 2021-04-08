@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <title>Login</title>
+    <title>CREATE AN ACCOUNT!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"> <!--specifies sizing-->
     <link rel="stylesheet" href="static/bootstrap.css">
     <link rel="stylesheet" href="static/tweets.css">
@@ -12,9 +12,9 @@
 </head>
 
 <body>
-<h1 class="center text-center">LOGIN!</h1>
+<h1 class="center text-center">CREATE ACCOUNT!</h1>
 
-<form action="/login" method="post" class="text-center text-success">
+<form action="/create_user" method="post" class="text-center text-success">
     <div>
     <label for="username">Username:</label>
     <input name="username" type="text" id="username">
@@ -25,7 +25,9 @@
     <input name="password" type="password" id="password">
     </div>
 
-    <input type="submit" value="login" class="btn btn-success submit-tweet">
+    <input type="submit" value="create" class="btn btn-success submit-tweet">
 </form>
+
+<span class="text-center">  <h3><a href="login">already have an account?</a></h3> </span>
 
 </body>

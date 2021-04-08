@@ -10,28 +10,30 @@ import sqlite3
 import requests
 import random
 import secrets
+import hashlib
+import create_user as create_user_module
 
-logged_in_secret = "--invalid--"
 
 # @aiohttp_jinja2.template('bootstrap_test.html.jinja2')
 async def home(request):
-    # does the user have the cookie at all?
-    if "logged_in" not in request.cookies:
-        raise web.HTTPFound('/login')
-    # is the cookie correct
-    if request.cookies['logged_in'] != logged_in_secret:
-        # they aren't logged in
-        raise web.HTTPFound('/login')
-    # if they ARE logged in
-    print("Is the user logged in? %s" % request.cookies['logged_in'])
-    print("user is coming from %s" % request.remote)
     conn = sqlite3.connect('tweet.db')
     cursor = conn.cursor()
+    # does the user have the cookie at all? if not, send them back to login
+    if "logged_in" not in request.cookies:
+        raise web.HTTPFound('/login')
+    cursor.execute("SELECT username FROM users WHERE cookie=?", (request.cookies["logged_in"],))
+    result = cursor.fetchone()
+    # if they have a cookie, but it isn't in the database
+    if result is None:
+        raise web.HTTPFound('/login')
+    # if they ARE logged in
+    print("Is the user is %s" % result[0])
+    print("user is coming from %s" % request.remote)
     cursor.execute("SELECT * FROM tweets ORDER BY likes DESC")
     results = cursor.fetchall()
     context = {"results": results, "lucky_number": random.randint(0, 100), "name": "Influencer"}
     response = aiohttp_jinja2.render_template('bootstrap_test.html.jinja2', request, context)
-    response.set_cookie('logged_in', 'yes')
+    # response.set_cookie('logged_in', 'yes')
     return response
 
 
@@ -72,6 +74,15 @@ async def favorites(request):
 async def tweets(request):
     conn = sqlite3.connect('tweet.db')
     cursor = conn.cursor()
+    cursor.execute("SELECT username FROM users WHERE cookie=?", (request.cookies["logged_in"],))
+    result = cursor.fetchone()
+    # if they have a cookie, but it isn't in the database
+    if result is None:
+        raise web.HTTPFound('/login')
+    # does the user have the cookie at all? if not, send them back to login
+    if "logged_in" not in request.cookies:
+        raise web.HTTPFound('/login')
+    # END check for cookie
     cursor.execute("SELECT * FROM tweets ORDER BY likes DESC")
     results = cursor.fetchall()
     cursor.execute("SELECT * FROM comment ORDER BY likes DESC")
@@ -154,22 +165,59 @@ async def show_login(request):
 
 async def login(request):
     global logged_in_secret
+    # getting the data from the post
     data = await request.post()
     print(data)
     username = data["username"]
     password = data["password"]
-    # connect to data base and check username and password, check if authorized
-    if(username=="Bill" and password=="1234"):
-        # if they match, make a cookie
-        response = web.Response(text="congrats!",
-                                status=302,
-                                headers={'Location': "/"})
-        # set cookie to a random string (in this case, 32 random values)
-        logged_in_secret = secrets.token_hex(16)
-        response.cookies['logged_in'] = logged_in_secret
-    else:
-        # if they fail, send them back to home
-        raise web.HTTPFound('/')
+
+    # connect to data base
+    conn = sqlite3.connect('tweet.db')
+    cursor = conn.cursor()
+
+    # get the salt from the row that contains the username
+    cursor.execute("SELECT salt FROM users WHERE username=?", (username,))
+    query_result = cursor.fetchone()
+
+    # if there is no row with a username that matches the input, send them back to the login
+    if query_result is None:
+        print("invalid username: ", username)
+        raise web.HTTPFound('/login')
+
+    # hash the password they submitted with the salt you got from the database (always returns a list, hence the [0])
+    salt = query_result[0]
+    salted_password = password + salt
+    hashed_password = hashlib.md5(salted_password.encode('ascii')).hexdigest()
+    print("using hashed password: ", hashed_password)
+
+    # Check to see if the username and password match. Returns the number of users that match this condition
+    cursor.execute("SELECT COUNT(*) FROM users WHERE username=? AND password=?",
+                   (username, hashed_password))
+    # cursor executes a query, fetchone fetches the first row in the response
+
+    # now we have a 1 (there is one user with that matching info) or a 0 (there are no users that match)
+    query_result = cursor.fetchone()
+    user_exists = query_result[0]
+    print("user query: %d" % user_exists)
+
+    # if there's no user that matches in the database, send them back to log in
+    if user_exists == 0:
+        print('failed login')
+        raise web.HTTPFound('/login')
+
+    # if they match, make a cookie and return it to them.
+    response = web.Response(text="congrats!",
+                            status=302,
+                            headers={'Location': "/tweets"})
+    # set cookie to a random string (in this case, 32 random values)
+    logged_in_secret = secrets.token_hex(16)
+    response.cookies['logged_in'] = logged_in_secret
+    # store the cookie in our own database at their username so we can validate
+    cursor.execute("UPDATE users SET cookie=? WHERE username=?",
+                   (logged_in_secret, username))
+    conn.commit()
+    print("successful login with cookie: ", logged_in_secret)
+    conn.close()
     return response
 
 async def logout(request):
@@ -180,6 +228,32 @@ async def logout(request):
     logged_in_secret = "--invalid--"
     return response
 
+async def test(request):
+    # pretend we got this variable from a data base
+    print("query received when test button pushed: ", request.query)
+    # query comes bck as a multidictproxy (dictionary). LIke a dict inside an array
+    info_from_jquery = str(request.query['id'])
+    # use the passed info to get stuff from the data base
+    database = {"tag": "test-worked"}
+    response = database[info_from_jquery]
+    return web.json_response(data={"database_data": response})
+
+async def create_user(request):
+    context = {"place_holder": 69}
+    response = aiohttp_jinja2.render_template('create_user.html.jinja2', request, context)
+    return response
+
+async def call_user(request):
+    data = await request.post()
+    print(data)
+    username = data["username"]
+    password = data["password"]
+    info = [username, password]
+    success = create_user_module.create_user(info)
+    if success:
+        raise web.HTTPFound('/login')
+    else:
+        raise web.HTTPFound('/create_user')
 
 def main():
     app = web.Application()
@@ -197,6 +271,9 @@ def main():
                     web.static('/static', 'static'),
                     web.post('/tweet', add_tweet),
                     web.post('/comment', comment),
+                    web.get('/test', test),
+                    web.get('/create_user', create_user),
+                    web.post('/create_user', call_user),
                     web.get('/like', like),
                     web.get('/like.json', like_json)])
     print("webserver 1.0")
@@ -211,8 +288,15 @@ def main():
 
     # tweet",10)-- to control the likes
 
-    #sqlite3 tweet.db < schema.sql
+    # TO CONNECT IN TERMINAL: sqlite3 tweet.db
+    # sqlite3 tweet.db < schema.sql
     #sudo systemctl restart webserver
+
+    # updating the database based on the schema
+    # sqlite3 tweet.db < schema.sql
+
+    # class is .
+    # id is #
 
 
 def get_location(ip_address):

@@ -68,6 +68,26 @@
             })
         })
 
+        // 12 WEEKS PRACTICE
+        // when the page has loaded
+        $(document).ready(function(){
+            // when something with the class "test-button" gets clicked
+            $(".test-button").click(function(){
+                // associate the thing clicked with the variable btn
+                let btn = $(this);
+                // get the id value that you assigned it (in this case, the id "test-id" is "tag"
+                let btn_id = btn.attr("test-id");
+                console.log("you liked the button with id:", btn_id)
+                // add query information and get information from the address using it
+                $.get("/test?id=" + btn_id, function(data){
+                    // data here is the exact dictionary you passed in the webserver.py (in dict form)
+                    console.log("received data:", data);
+                    // insert that data into a place tagged with the id "test-worked"
+                    $("#test-worked").html(data.database_data)
+                })
+            })
+        })
+
     </script>
     <style>
         .center {
@@ -78,6 +98,10 @@
 
 <body>
 <h1 class="center">TWEETS!</h1>
+
+<span class="btn btn-success test-button" test-id="tag">test button!</span>
+
+<span><h1 id="test-worked"></h1></span>
 
 <form action="/tweet" method="post" class="text-center">
     <input name="content" type="text">

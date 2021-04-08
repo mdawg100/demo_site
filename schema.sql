@@ -15,3 +15,11 @@ CREATE TABLE IF NOT EXISTS "comment" (
 	"id"	INTEGER NOT NULL UNIQUE,
 	PRIMARY KEY("id" AUTOINCREMENT)
 );
+
+CREATE TABLE IF NOT EXISTS "users" (
+    "username" TEXT NOT NULL UNIQUE,
+    "password" TEXT,
+    "cookie" TEXT,
+    "salt" TEXT
+);
+
