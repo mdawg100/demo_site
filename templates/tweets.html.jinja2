@@ -51,7 +51,7 @@
                 // a like button was clicked, but which one?
                 let btn = $(this);
                 let tweet_id = btn.attr("data-tweet-id");
-                console.log("you liked a tweet id", tweet_id);
+                console.log("you liked tweet with id", tweet_id);
                 // this goes to the below URL and grabs the data using the like_json path in webserver
                 // but without changing the actual displayed webpage
                 $.get("/like.json?id=" + tweet_id, function(data){
@@ -64,6 +64,23 @@
                         // show it again
                         like_count.fadeIn(1000);
                     },200)
+                })
+            })
+        })
+
+        // Delete button
+        $(document).ready(function(){
+            $(".delete-btn").click(function(){
+                // a delete button was clicked, but which one?
+                let btn = $(this);
+                let tweet_id = btn.attr("data-tweet-id");
+                console.log("you want to delete tweet with id", tweet_id);
+                // this goes to the below URL and grabs the data using the like_json path in webserver
+                // but without changing the actual displayed webpage
+                $.get("/delete?id=" + tweet_id, function(data){
+                    console.log(data);
+                    let tweet = $("#content-id-"+tweet_id)
+                    tweet.fadeOut(400);
                 })
             })
         })
@@ -108,8 +125,20 @@
     <input type="submit" value="talk about it!" class="submit-tweet">
 </form>
 
+    <div class="col-sm">
+        <div class="text-center">
+            <h2><a href="login">Login!</a></h2>
+        </div>
+    </div>
+
+    <div class="col-sm">
+        <div class="text-center">
+            <h3><a href="logout">Logout!</a></h3>
+        </div>
+    </div>
+
 {% for tweet in tweets %}
-    <div class="card container-fluid">
+    <div class="card container-fluid" id="content-id-{{ tweet[4] }}">
         <div class="card-title">
             <b><h5><u>#{{ tweet[4] }}</u> From: {{ tweet[3] }}</h5></b>
         </div>
@@ -124,6 +153,11 @@
             <span class="btn btn-success like-btn" data-tweet-id = "{{ tweet[4] }}">Like!</span>
             <!-- <a class="btn btn-success" href="/like?id={{ tweet[4] }}">Like!</a> -->
             <span class="btn btn-success" id="comment-btn-{{ tweet[4] }}">Comment!</span>
+            <!-- DELETE BUTTON -->
+            <!-- IF DELETE AUTHORITY EXISTS -->
+            {% if delete_auth %}
+            <span class="btn btn-danger delete-btn" data-tweet-id ="{{ tweet[4] }}">Delete!</span>
+            {% endif %}
         </div>
             {%  for comment in comments %}
             {%  if tweet[4] == comment[1] %}
@@ -147,25 +181,25 @@
 
 <div class="row more-margin link-display">
 
-    <div class="col-sm-3">
+    <div class="col-sm">
         <div class="text-center">
             <h3><a href="bootstrap_test.html">Homepage!</a></h3>
         </div>
     </div>
 
-    <div class="col-sm-3">
+    <div class="col-sm">
         <div class="text-center">
             <h3><a href="about_me.html">About Me!</a></h3>
         </div>
     </div>
 
-    <div class="col-sm-3">
+    <div class="col-sm">
         <div class="text-center">
             <h3><a href="pictures.html">Pictures!</a></h3>
         </div>
     </div>
 
-    <div class="col-sm-3">
+    <div class="col-sm">
         <div class="text-center">
             <h3><a href="favorites.html">Favorites!</a></h3>
         </div>

@@ -18,22 +18,21 @@ import create_user as create_user_module
 async def home(request):
     conn = sqlite3.connect('tweet.db')
     cursor = conn.cursor()
-    # does the user have the cookie at all? if not, send them back to login
-    if "logged_in" not in request.cookies:
-        raise web.HTTPFound('/login')
-    cursor.execute("SELECT username FROM users WHERE cookie=?", (request.cookies["logged_in"],))
-    result = cursor.fetchone()
-    # if they have a cookie, but it isn't in the database
-    if result is None:
-        raise web.HTTPFound('/login')
-    # if they ARE logged in
-    print("Is the user is %s" % result[0])
-    print("user is coming from %s" % request.remote)
+    # # does the user have the cookie at all? if not, send them back to login
+    # if "logged_in" not in request.cookies:
+    #     raise web.HTTPFound('/login')
+    # cursor.execute("SELECT username FROM users WHERE cookie=?", (request.cookies["logged_in"],))
+    # result = cursor.fetchone()
+    # # if they have a cookie, but it isn't in the database
+    # if result is None:
+    #     raise web.HTTPFound('/login')
+    # # if they ARE logged in
+    # print("Is the user is %s" % result[0])
+    # print("user is coming from %s" % request.remote)
     cursor.execute("SELECT * FROM tweets ORDER BY likes DESC")
     results = cursor.fetchall()
     context = {"results": results, "lucky_number": random.randint(0, 100), "name": "Influencer"}
     response = aiohttp_jinja2.render_template('bootstrap_test.html.jinja2', request, context)
-    # response.set_cookie('logged_in', 'yes')
     return response
 
 
@@ -72,23 +71,32 @@ async def favorites(request):
 
 @aiohttp_jinja2.template('tweets.html.jinja2')
 async def tweets(request):
+    delete_auth = True
     conn = sqlite3.connect('tweet.db')
     cursor = conn.cursor()
     # does the user have the cookie at all? if not, send them back to login
     if "logged_in" not in request.cookies:
-        raise web.HTTPFound('/login')
+        delete_auth = False
+        print("no delete authority")
     cursor.execute("SELECT username FROM users WHERE cookie=?", (request.cookies["logged_in"],))
     result = cursor.fetchone()
-    # if they have a cookie, but it isn't in the database
+    # If the user is not logged in, assign them as guest user (no delete auth)
     if result is None:
-        raise web.HTTPFound('/login')
+        result = ("Guest User",)
+        delete_auth = False
+    result = result[0]
+    print(result)
+    # # if they have a cookie, but it isn't the admin
+    # if result != "admin":
+    #     delete_auth = False
+    #     print("no delete authority")
     # END check for cookie
     cursor.execute("SELECT * FROM tweets ORDER BY likes DESC")
     results = cursor.fetchall()
     cursor.execute("SELECT * FROM comment ORDER BY likes DESC")
     comments = cursor.fetchall()
     conn.close()
-    return {"tweets": results, "comments": comments}
+    return {"tweets": results, "comments": comments, "delete_auth": delete_auth}
 
 
 async def add_tweet(request):
@@ -164,7 +172,6 @@ async def show_login(request):
 # going to use post instead of get because post doesn't show in the URL
 
 async def login(request):
-    global logged_in_secret
     # getting the data from the post
     data = await request.post()
     print(data)
@@ -221,11 +228,12 @@ async def login(request):
     return response
 
 async def logout(request):
-    global logged_in_secret
     # delete their cookie
-    response = aiohttp_jinja2.render_template('show_login.html.jinja2', request, {})
-    response.cookies['logged_in'] = ''
-    logged_in_secret = "--invalid--"
+    # response = aiohttp_jinja2.render_template('show_login.html.jinja2', request, {})
+    response = web.Response(text="congrats!",
+                            status=302,
+                            headers={'Location': "/"})
+    response.cookies['logged_in'] = "--invalid--"
     return response
 
 async def test(request):
@@ -255,6 +263,42 @@ async def call_user(request):
     else:
         raise web.HTTPFound('/create_user')
 
+async def delete_tweet(request):
+    # does the user have the cookie at all? if not, send them back to login
+    conn = sqlite3.connect('tweet.db')
+    cursor = conn.cursor()
+    if "logged_in" not in request.cookies:
+        response = web.Response(text="Nice try",
+                                status=403,
+                                headers={'Location': "/"})
+        return response
+    cursor.execute("SELECT username FROM users WHERE cookie=?", (request.cookies["logged_in"],))
+    result = cursor.fetchone()
+    # if they have a cookie, but it isn't in the database, result = -none-
+    if result is None:
+        response = web.Response(text="Nice try",
+                                status=403,
+                                headers={'Location': "/"})
+        return response
+    # so the there us an actual user name, extract the string
+    result = result[0]
+    if result != "admin":
+        response = web.Response(text="Nice try",
+                                status=403,
+                                headers={'Location': "/"})
+        print("nice try")
+        return response
+    print("Is the user is %s" % result[0])
+    print("user is coming from %s" % request.remote)
+    # user is logged in with a cookie, now delete the tweet
+    tweet_id = str(request.query['id'])
+    print("tweet id is: %s" % tweet_id)
+    cursor.execute("DELETE FROM tweets WHERE id=?", (tweet_id,))
+    # cursor.execute("UPDATE tweets SET likes=? WHERE id=?", (like_count + 1, tweet_id))
+    conn.commit()
+    conn.close()
+    return web.json_response(data={"tweet_id": tweet_id})
+
 def main():
     app = web.Application()
     aiohttp_jinja2.setup(app,
@@ -275,6 +319,7 @@ def main():
                     web.get('/create_user', create_user),
                     web.post('/create_user', call_user),
                     web.get('/like', like),
+                    web.get('/delete', delete_tweet),
                     web.get('/like.json', like_json)])
     print("webserver 1.0")
     # type in: host:port
